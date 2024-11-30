@@ -14,34 +14,53 @@
         h1 {
             color: #333;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
         }
-        li {
-            margin: 10px 0;
-        }
-        a {
-            color: #1a73e8;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
+        .image-gallery img {
+            width: 150px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
 
     <h1>Welcome to the Feeling Folder</h1>
-    <p>Below are the available subfolders:</p>
-    <ul>
-        <li><a href="angry/">Angry</a></li>
-        <li><a href="sad/">Sad</a></li>
-        <li><a href="hungry/">Hungry</a></li>
-        <li><a href="love/">Love</a></li>
-        <li><a href="think/">Think</a></li>
-        <li><a href="sleep/">Sleep</a></li>
-    </ul>
+    <p>Here are the available images:</p>
+    
+    <div class="image-gallery" id="image-gallery"></div>
+
+    <script>
+        // List of folders (assuming you have these folder names inside the 'feeling' directory)
+        const subfolders = ['angry', 'sad', 'hungry', 'love', 'think', 'sleep'];
+
+        subfolders.forEach(folder => {
+            // Fetch the list of image files from each subfolder
+            const gallery = document.getElementById('image-gallery');
+
+            // Example URL for images
+            const folderPath = `assets/pet/dog/feeling/${folder}`;
+
+            // Create a new section for each folder
+            const folderSection = document.createElement('div');
+            folderSection.innerHTML = `<h2>${folder.charAt(0).toUpperCase() + folder.slice(1)}</h2>`;
+
+            // For demonstration, adding images manually. In practice, you would fetch them dynamically.
+            const images = [`${folderPath}/image1.png`, `${folderPath}/image2.png`, `${folderPath}/image3.png`];
+            
+            images.forEach(imageUrl => {
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = `Image from ${folder}`;
+                folderSection.appendChild(img);
+            });
+
+            gallery.appendChild(folderSection);
+        });
+    </script>
 
 </body>
 </html>
