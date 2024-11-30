@@ -5,19 +5,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dog Feelings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 10px 0;
+        }
+        .gallery img {
+            width: 150px;
+            margin: 5px;
+            border: 1px solid #ccc;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    </style>
 </head>
 <body>
     <h1>Welcome to Dog Feelings</h1>
     <p>Select a category to explore:</p>
-    <ul>
-        <li><a href="dog/feeling/">Feeling</a></li>
-        <li><a href="dog/happy/">Happy</a></li>
-        <li><a href="dog/hungry/">Hungry</a></li>
-        <li><a href="dog/sleep/">Sleep</a></li>
+    <ul id="categories">
+        <li><a href="#" onclick="loadGallery('dog/feeling')">Feeling</a></li>
+        <li><a href="#" onclick="loadGallery('dog/happy')">Happy</a></li>
+        <li><a href="#" onclick="loadGallery('dog/hungry')">Hungry</a></li>
+        <li><a href="#" onclick="loadGallery('dog/sleep')">Sleep</a></li>
     </ul>
-    <p>Other resources:</p>
-    <ul>
-        <li><a href="dog/pet.gif">Pet GIF</a></li>
-    </ul>
+    <div id="galleryContainer">
+        <h2>Gallery</h2>
+        <div class="gallery" id="gallery"></div>
+    </div>
+    <script>
+        function loadGallery(folder) {
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = ''; // Clear previous images
+            
+            // Image placeholders (replace with server-side image fetching in production)
+            const images = {
+                'dog/feeling': [
+                    'angry/angry-export1.png', 'angry/angry-export2.png', 
+                    'hungry/hungry-export16.png', 'love/love-export1.png', 
+                    'sad/sad-export10.png', 'sleep/sleep-export1.png'
+                ],
+                'dog/happy': [
+                    'main-export1.png', 'main-export2.png', 'main-export3.png'
+                ],
+                'dog/hungry': [
+                    'agery-export1.png', 'agery-export2.png', 'agery-export3.png'
+                ],
+                'dog/sleep': [
+                    'sleep-export1.png', 'sleep-export2.png', 'sleep-export3.png'
+                ]
+            };
+
+            if (images[folder]) {
+                images[folder].forEach(image => {
+                    const img = document.createElement('img');
+                    img.src = `${folder}/${image}`;
+                    img.alt = image;
+                    gallery.appendChild(img);
+                });
+            } else {
+                gallery.innerHTML = '<p>No images available for this category.</p>';
+            }
+        }
+    </script>
 </body>
 </html>
