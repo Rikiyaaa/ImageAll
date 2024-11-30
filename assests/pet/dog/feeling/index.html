@@ -37,27 +37,28 @@
         // List of folders (assuming you have these folder names inside the 'feeling' directory)
         const subfolders = ['angry', 'sad', 'hungry', 'love', 'think', 'sleep'];
 
+        // Loop through each folder and create images for each
         subfolders.forEach(folder => {
-            // Fetch the list of image files from each subfolder
             const gallery = document.getElementById('image-gallery');
-
-            // Example URL for images
+            
+            // Folder path for images
             const folderPath = `assets/pet/dog/feeling/${folder}`;
 
             // Create a new section for each folder
             const folderSection = document.createElement('div');
             folderSection.innerHTML = `<h2>${folder.charAt(0).toUpperCase() + folder.slice(1)}</h2>`;
 
-            // For demonstration, adding images manually. In practice, you would fetch them dynamically.
-            const images = [`${folderPath}/image1.png`, `${folderPath}/image2.png`, `${folderPath}/image3.png`];
-            
-            images.forEach(imageUrl => {
+            // Generate a set number of images (e.g., 5 images per folder)
+            for (let i = 1; i <= 5; i++) {  // Adjust the loop for the number of images you expect
+                const imageUrl = `${folderPath}/${folder}-export${i}.png`;  // Generate image URL
+
                 const img = document.createElement('img');
                 img.src = imageUrl;
-                img.alt = `Image from ${folder}`;
+                img.alt = `${folder} export ${i}`;  // Alt text for accessibility
                 folderSection.appendChild(img);
-            });
+            }
 
+            // Append the section for the current folder to the gallery
             gallery.appendChild(folderSection);
         });
     </script>
